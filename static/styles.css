@@ -1,0 +1,17 @@
+. {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  /* background-color: aqua; */
+}
+
+.error {
+  background-color: yellow;
+  border-radius: 15px;
+}
+
+.error strong {
+  color: red;
+}

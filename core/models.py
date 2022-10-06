@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User  # Importar usuarios do Django
+from datetime import timezone, timedelta
 
 # Create your models here.
 
@@ -20,4 +21,7 @@ class Event(models.Model):
         return self.title
 
     def get_date_event(self):
-        return self.date_event.strftime('%d/%m/%Y %H:%M horas')
+        data = self.date_event
+        tzBR = timezone(timedelta(hours=-3))
+        tzData = data.astimezone(tzBR)
+        return tzData.strftime('%d/%m/%Y %H:%M')

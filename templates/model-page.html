@@ -4,8 +4,17 @@
     {% include "model-header.html" %}
 </head>
 <body>
-    {% block content %} {% endblock %}
+    <div class="p-5 bg-dark text-white text-center">
+        <h1>Appointment Book</h1>
+        <p>I created a responsive page with Python and Django, using the Bootstrap.</p> 
+    </div>
+    
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div><!-- div container -->
 
-    {% include "model-footer.html" %}
+    <div class="modal-footer mt-5 p-4 bg-dark text-white">
+        {% include "model-footer.html" %}
+    </div><!-- div modal-footer -->
 </body>
 </html>

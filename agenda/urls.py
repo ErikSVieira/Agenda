@@ -22,6 +22,10 @@ urlpatterns = [
     path('', RedirectView.as_view(url='/event/')),
     path('admin/', admin.site.urls),
     path('event/', views.list_event),
+    path('event/event/', views.evento),
+    path('event/event/submit', views.submit_evento),
     path('poll/', views.list_poll),
-    # path('', views.index),
+    path('login/', views.login_user),
+    path('login/submit', views.submit_login),
+    path('logout/', views.logout_user)
 ]

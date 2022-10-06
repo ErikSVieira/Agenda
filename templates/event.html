@@ -1,12 +1,36 @@
 {% extends "model-page.html" %}
 
 {% block content %}
+
+    {% include "menu.html" %}
+    
     <h1>Agendamentos</h1>
-    <ul>
-        {% for event in events %}
-            <li>
-                {{ event.title }} - {{ event.get_date_event }} - {{ event.date_event }}
-            </li>
+
+    <div class="container pb-2">
+        <a href="event/">
+            <button class="btn btn-info" type="button">Novo evento</button>
+        </a>
+    </div>
+
+    <table class="table table-active table-striped table-hover table-responsive-sm">
+        <thead class="table-success">
+            <tr>
+                <th>Event</th>
+                <th>Data - time</th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.get_date_event }}</td>
+                <td class="text-center">
+                    <button class="btn btn-warning">Edit</button>
+                    <button class="btn btn-danger">Delet</button>
+                </td>
+            </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
 {% endblock %}
