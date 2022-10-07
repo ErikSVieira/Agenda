@@ -23,14 +23,57 @@
         <tbody>
             {% for event in events %}
             <tr>
-                <td>{{ event.title }}</td>
-                <td>{{ event.get_date_event }}</td>
+                <td>
+                    <a data-bs-toggle="modal" 
+                        data-bs-target="#staticBackdrop{{ event.id }}"
+                        href="">
+                        {{ event.title }}
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" 
+                        id="staticBackdrop{{ event.id }}" 
+                        data-bs-backdrop="static" 
+                        data-bs-keyboard="false" 
+                        tabindex="-1"
+                        aria-labelledby="staticBackdropLabel" 
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ event.title }}</h1>
+                                    <button type="button" 
+                                        class="btn-close" 
+                                        data-bs-dismiss="modal" 
+                                        aria-label="Close">
+                                    </button>
+                                </div><!-- div modal-header -->
+                                <div class="modal-body">
+                                    {{ event.description }}
+                                </div><!-- div modal-body -->
+                                <div class="modal-body mt-2 p-0 text-end">
+                                    {{ event.get_date_event }}
+                                </div><!-- div modal-body -->
+                                <div class="modal-footer">
+                                    <button type="button" 
+                                        class="btn btn-secondary" 
+                                        data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <!-- <button type="button" class="btn btn-primary">Finished</button> -->
+                                </div><!-- div modal-footer -->
+                            </div><!-- div modal-content-->
+                        </div><!-- div modal-dialog -->
+                    </div><!-- div modal fade -->
+                </td>
+                <td>
+                    {{ event.get_date_event }}
+                </td>
                 <td class="text-center">
                     <button class="btn btn-warning">Edit</button>
                     <button class="btn btn-danger">Delet</button>
                 </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}
