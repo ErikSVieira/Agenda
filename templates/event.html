@@ -12,6 +12,8 @@
         </a>
     </div>
 
+    {% include "alert.html" %}
+
     <table class="table table-active table-striped table-hover table-responsive-sm">
         <thead class="table-success">
             <tr>
@@ -40,7 +42,10 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ event.title }}</h1>
+                                    <h1 class="modal-title fs-5" 
+                                        id="staticBackdropLabel">
+                                        {{ event.title }}
+                                    </h1>
                                     <button type="button" 
                                         class="btn-close" 
                                         data-bs-dismiss="modal" 
@@ -48,10 +53,12 @@
                                     </button>
                                 </div><!-- div modal-header -->
                                 <div class="modal-body">
+                                    <strong>Description: </strong>
                                     {{ event.description }}
                                 </div><!-- div modal-body -->
-                                <div class="modal-body mt-2 p-0 text-end">
-                                    {{ event.get_date_event }}
+                                <div class="modal-body p-2 text-end">
+                                    <strong>Date: </strong>
+                                    {{ event.date_event }}
                                 </div><!-- div modal-body -->
                                 <div class="modal-footer">
                                     <button type="button" 
@@ -69,8 +76,12 @@
                     {{ event.get_date_event }}
                 </td>
                 <td class="text-center">
-                    <button class="btn btn-warning">Edit</button>
-                    <button class="btn btn-danger">Delet</button>
+                    <a href="event/?id={{ event.id }}">
+                        <button class="btn btn-warning">Edit</button>
+                    </a>
+                    <a href="event/delet/{{ event.id }}/">
+                        <button class="btn btn-danger">Delet</button>
+                    </a>
                 </td>
             </tr>
             {% endfor %}

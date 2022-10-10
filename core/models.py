@@ -25,3 +25,11 @@ class Event(models.Model):
         tzBR = timezone(timedelta(hours=-3))
         tzData = data.astimezone(tzBR)
         return tzData.strftime('%d/%m/%Y %H:%M')
+        # return self.date_event.strftime('%d/%m/%Y %H:%M')
+    
+    def get_input_date_event(self):
+        data = self.date_event
+        tzBR = timezone(timedelta(hours=-3))
+        tzData = data.astimezone(tzBR)
+        return tzData.strftime('%Y-%m-%dT%H:%M')
+        # return self.date_event.strftime('%Y-%m-%dT%H:%M')

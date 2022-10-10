@@ -4,71 +4,70 @@
 
 {% include 'menu.html' %}
 
-<div class="container">
-    <h3>
-        Create an new appointment for you
-    </h3>
+    <div class="container">
+        <h3>
+            Create an new appointment for you
+        </h3>
 
-    {% for message in messages %}
-        <div class="container error">
-            <strong>Alert: </strong>{{ message }}
-        </div><!-- div container error -->
-    {% endfor %}
+        {% include "alert.html" %}
 
-    <hr>
-
-    <form action="submit" method="post">
-        {% csrf_token %}
-        <button class="btn btn-success" type="submit">
-            Salvar
-        </button>
-        <a href="/">
-            <button class="btn btn-danger" type="button">
-                Cancelar
-            </button>
-        </a>
         <hr>
-        <div class="mb-3 mt-3">
-            <label class="form-label" for="titulo">
-                Titulo: 
-            </label>
-            <input 
-                class="form-control" 
-                type="text" 
-                name="titulo" 
-                id="titulo" 
-                size="27"
-                placeholder="Enter new event"
-                required
-            />
-        </div>
-        <div class="mb-3 mt-3">
-            <label class="form-label" for="data_evento">
-                Data do Evento: 
-            </label>
-            <input 
-                class="form-control" 
-                type="datetime-local" 
-                name="data_evento" 
-                id="data_evento"
-                required
-            />
-        </div>
-        <div class="mb-3 mt-3">
-            <label class="form-label" for="description">
-                Description: 
-            </label>
-            <textarea
-                class="form-control"
-                name="description" 
-                id="description" 
-                cols="23"
-                rows="5"
-                placeholder="Enter description here..."
-                required
-                ></textarea>
-        </div>
-    </form>
-</div><!-- div container -->
+
+        <form action="submit" method="post">
+            {% csrf_token %}
+            <button class="btn btn-success" type="submit">
+                Salvar
+            </button>
+            <a href="/">
+                <button class="btn btn-danger" type="button">
+                    Cancelar
+                </button>
+            </a>
+            <hr>
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="titulo">
+                    Titulo: 
+                </label>
+                <input 
+                    class="form-control" 
+                    type="text" 
+                    name="titulo" 
+                    id="titulo" 
+                    size="27"
+                    placeholder="Enter new event"
+                    value="{{ event.title }}"
+                    required
+                />
+            </div>
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="data_evento">
+                    Data do Evento: 
+                </label>
+                <input 
+                    class="form-control" 
+                    type="datetime-local" 
+                    name="data_evento" 
+                    id="data_evento"
+                    value="{{ event.get_input_date_event }}"
+                    required
+                />
+            </div>
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="description">
+                    Description: 
+                </label>
+                <textarea
+                    class="form-control"
+                    name="description" 
+                    id="description" 
+                    cols="23"
+                    rows="5"
+                    placeholder="Enter description here..."
+                    required
+                    >{{ event.description }}</textarea>
+            </div>
+            <input type="number" name="id_event" value="{{ event.id }}" hidden>
+        </form>
+    </div><!-- div container -->
 
 {% endblock %}

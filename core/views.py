@@ -47,7 +47,17 @@ def list_poll(request):
 
 @login_required(login_url='/login/')
 def evento(request):
-    return render(request, 'evento.html')
+    id_event = request.GET.get('id')
+    dados = {}
+    try:
+        user = request.user
+        event = Event.objects.get(id=id_event)
+        if user == event.user:
+            dados['event'] = Event.objects.get(id=id_event)
+        else:
+            messages.error(request, 'Event not registered!!!')
+    finally:
+        return render(request, 'evento.html', dados)
 
 
 @login_required(login_url='/login/')
@@ -58,9 +68,20 @@ def submit_evento(request):
             date_event = request.POST.get('data_evento')
             description = request.POST.get('description')
             user = request.user
+            id_event = request.POST.get('id_event')
             if title == '' or description == '' or date_event == '':
                 messages.error(
-                    request, 'Invalid title or date event or description')
+                    request, 'Invalid title or event date or description')
+            elif id_event:
+                event = Event.objects.get(id=id_event)
+                if user == event.user:
+                    event.title = title
+                    event.description = description
+                    event.date_event = date_event
+                    event.save()
+                    messages.success(request, 'Event edited successfully')
+                else:
+                    messages.error(request, 'Edit failed. Invalid ID!')
             else:
                 Event.objects.create(
                     title=title,
@@ -68,10 +89,26 @@ def submit_evento(request):
                     description=description,
                     user=user
                 )
-                messages.success(request, 'Created Event with Success')
+                messages.success(request, 'Event created successfully')
         except:
-            messages.error(request, 'Operation Invalid')
+            messages.error(request, 'Operation Invalid!')
         finally:
-            return redirect('/event/event')
+            return redirect('/')
     else:
-        messages.error(request, 'Not saved. Error not identified!')
+        messages.error(request, 'Method not identified. Internal error!')
+
+
+@login_required(login_url='/login/')
+def delet_event(request, id_event):
+    user = request.user
+    event = Event.objects.get(id=id_event)
+    try:
+        if user == event.user:
+            event.delete()
+            messages.success(request, 'Event deleted successfully')
+        else:
+            messages.error(request, 'Operation not authorization!')
+    except:
+        messages.error(request, 'Event was not deleted. Error not identified!')
+    finally:
+        return redirect('/')
