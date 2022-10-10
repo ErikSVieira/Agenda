@@ -15,7 +15,7 @@
 
         <form action="submit" method="post">
             {% csrf_token %}
-            <button class="btn btn-success" type="submit">
+            <button class="btn btn-success" type="submit" onclick="return confirm('Você tem certeza que deseja salvar?');">
                 Salvar
             </button>
             <a href="/">

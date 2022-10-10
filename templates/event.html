@@ -14,7 +14,7 @@
 
     {% include "alert.html" %}
 
-    <table class="table table-active table-striped table-hover table-responsive-sm">
+    <table class="table align-middle table-active table-striped table-hover table-responsive-sm">
         <thead class="table-success">
             <tr>
                 <th>Event</th>
@@ -24,11 +24,14 @@
         </thead>
         <tbody>
             {% for event in events %}
-            <tr>
+            <tr class="{% if event.get_event_late %} 
+                        table-danger
+                    {% endif %}">
                 <td>
                     <a data-bs-toggle="modal" 
                         data-bs-target="#staticBackdrop{{ event.id }}"
-                        href="">
+                        href=""
+                        class="link-dark">
                         {{ event.title }}
                     </a>
                     <!-- Modal -->
@@ -79,7 +82,7 @@
                     <a href="event/?id={{ event.id }}">
                         <button class="btn btn-warning">Edit</button>
                     </a>
-                    <a href="event/delet/{{ event.id }}/">
+                    <a href="event/delet/{{ event.id }}/" onclick="return confirm('Você tem certeza que deseja deletar?');">
                         <button class="btn btn-danger">Delet</button>
                     </a>
                 </td>

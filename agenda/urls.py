@@ -25,7 +25,6 @@ urlpatterns = [
     path('event/event/', views.evento),
     path('event/event/submit', views.submit_evento),
     path('event/event/delet/<int:id_event>/', views.delet_event),
-    path('poll/', views.list_poll),
     path('login/', views.login_user),
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user)

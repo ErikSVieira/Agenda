@@ -1,17 +1,29 @@
 <div class="container bg-primary rounded-3">
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
         <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/event/?events=old">Old events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/event/?events=all">All events</a>
+                    </li>
+                </ul>
+            </div>
+
             <form class="d-flex input-group w-auto">
                 <input
                     type="search"
-                    class="form-control rounded"
+                    class="form-control"
                     placeholder="Search"
                     aria-label="Search"
                     aria-describedby="search-addon"
                 />
-                <span class="input-group-text border-0" id="search-addon">
-                    <i class="fas fa-search">Buscar</i>
-                </span>
+                <button class="btn btn-outline-light">Buscar</button>
             </form>
         </div><!-- div container-fluid -->
     

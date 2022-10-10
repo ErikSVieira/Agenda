@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User  # Importar usuarios do Django
-from datetime import timezone, timedelta
+from datetime import datetime  #, timezone, timedelta
 
 # Create your models here.
 
@@ -21,15 +21,22 @@ class Event(models.Model):
         return self.title
 
     def get_date_event(self):
-        data = self.date_event
-        tzBR = timezone(timedelta(hours=-3))
-        tzData = data.astimezone(tzBR)
-        return tzData.strftime('%d/%m/%Y %H:%M')
-        # return self.date_event.strftime('%d/%m/%Y %H:%M')
+        # data = self.date_event
+        # tzBR = timezone(timedelta(hours=-3))
+        # tzData = data.astimezone(tzBR)
+        # return tzData.strftime('%d/%m/%Y %H:%M')
+        return self.date_event.strftime('%d/%m/%Y %H:%M')
     
     def get_input_date_event(self):
-        data = self.date_event
-        tzBR = timezone(timedelta(hours=-3))
-        tzData = data.astimezone(tzBR)
-        return tzData.strftime('%Y-%m-%dT%H:%M')
-        # return self.date_event.strftime('%Y-%m-%dT%H:%M')
+        # data = self.date_event
+        # tzBR = timezone(timedelta(hours=-3))
+        # tzData = data.astimezone(tzBR)
+        # return tzData.strftime('%Y-%m-%dT%H:%M')
+        return self.date_event.strftime('%Y-%m-%dT%H:%M')
+
+
+    def get_event_late(self):
+        if self.date_event < datetime.now():
+            return True
+        else:
+            return False
